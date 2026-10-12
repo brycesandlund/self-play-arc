@@ -1,0 +1,255 @@
+{
+  "a10-canvas30": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        3
+      ],
+      "mean_max_probability": 0.9989786744117737,
+      "within_puzzle_instance_variance": 2.177917667722795e-05
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        5
+      ],
+      "mean_max_probability": 0.9942810535430908,
+      "within_puzzle_instance_variance": 3.332922160481644e-09
+    }
+  },
+  "l40s-pilot": {
+    "x": {
+      "unique_argmax_boards": 8,
+      "boards": 64,
+      "uniform_board_fraction": 0.59375,
+      "argmax_colors": [
+        3,
+        7
+      ],
+      "mean_max_probability": 0.6139155626296997,
+      "within_puzzle_instance_variance": 0.0009712278260849416
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        2
+      ],
+      "mean_max_probability": 0.9998127222061157,
+      "within_puzzle_instance_variance": 5.698079594967931e-12
+    }
+  },
+  "cpu-no-progress-1000": {
+    "x": {
+      "unique_argmax_boards": 18,
+      "boards": 64,
+      "uniform_board_fraction": 0.59375,
+      "argmax_colors": [
+        3,
+        7
+      ],
+      "mean_max_probability": 0.29038000106811523,
+      "within_puzzle_instance_variance": 0.00023823404626455158
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        2
+      ],
+      "mean_max_probability": 0.9996311664581299,
+      "within_puzzle_instance_variance": 7.169245058724627e-11
+    }
+  },
+  "a10-progress10-2000": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        7
+      ],
+      "mean_max_probability": 0.999968945980072,
+      "within_puzzle_instance_variance": 3.885179289397911e-09
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        4
+      ],
+      "mean_max_probability": 0.9999860525131226,
+      "within_puzzle_instance_variance": 1.328811225582133e-17
+    }
+  },
+  "a10-seed7-2000": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        5
+      ],
+      "mean_max_probability": 0.9956371784210205,
+      "within_puzzle_instance_variance": 1.4063381968298927e-05
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        10
+      ],
+      "mean_max_probability": 0.9997673630714417,
+      "within_puzzle_instance_variance": 4.2285071928313545e-13
+    }
+  },
+  "cpu-smoke": {
+    "x": {
+      "unique_argmax_boards": 58,
+      "boards": 64,
+      "uniform_board_fraction": 0.0,
+      "argmax_colors": [
+        2,
+        7
+      ],
+      "mean_max_probability": 0.11702077835798264,
+      "within_puzzle_instance_variance": 1.8134974197892006e-06
+    },
+    "y": {
+      "unique_argmax_boards": 8,
+      "boards": 64,
+      "uniform_board_fraction": 0.0,
+      "argmax_colors": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "mean_max_probability": 0.1415955275297165,
+      "within_puzzle_instance_variance": 1.4079296839497601e-08
+    }
+  },
+  "a10-pilot-v3": {
+    "x": {
+      "unique_argmax_boards": 9,
+      "boards": 64,
+      "uniform_board_fraction": 0.421875,
+      "argmax_colors": [
+        3,
+        7
+      ],
+      "mean_max_probability": 0.6005029678344727,
+      "within_puzzle_instance_variance": 0.0008286356460303068
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        2
+      ],
+      "mean_max_probability": 0.9998091459274292,
+      "within_puzzle_instance_variance": 4.125313805836139e-12
+    }
+  },
+  "cpu-1000": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        3
+      ],
+      "mean_max_probability": 0.9997826814651489,
+      "within_puzzle_instance_variance": 1.5370692096894345e-07
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        5
+      ],
+      "mean_max_probability": 0.9998822212219238,
+      "within_puzzle_instance_variance": 2.7402390405194656e-15
+    }
+  },
+  "l40s-canvas30": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        3
+      ],
+      "mean_max_probability": 0.9989770650863647,
+      "within_puzzle_instance_variance": 2.1881036445847712e-05
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        5
+      ],
+      "mean_max_probability": 0.9942836761474609,
+      "within_puzzle_instance_variance": 3.3382372421897344e-09
+    }
+  },
+  "a10-meta-2000": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        7
+      ],
+      "mean_max_probability": 0.9837837219238281,
+      "within_puzzle_instance_variance": 5.8848687331192195e-05
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        2
+      ],
+      "mean_max_probability": 0.9999121427536011,
+      "within_puzzle_instance_variance": 8.170741372989093e-14
+    }
+  },
+  "a10-no-progress-2000": {
+    "x": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        3
+      ],
+      "mean_max_probability": 0.9999995827674866,
+      "within_puzzle_instance_variance": 7.461990227108917e-12
+    },
+    "y": {
+      "unique_argmax_boards": 1,
+      "boards": 64,
+      "uniform_board_fraction": 1.0,
+      "argmax_colors": [
+        3
+      ],
+      "mean_max_probability": 0.9997601509094238,
+      "within_puzzle_instance_variance": 4.3639737148485654e-18
+    }
+  }
+}

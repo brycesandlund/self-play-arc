@@ -1,0 +1,68 @@
+{
+  "runs/a10-canvas30/checkpoint.pt": {
+    "sha256": "971405f5b9595de233d78169dab9bc60760f58fd589c8b710b188f171b1b2c14",
+    "step": 200,
+    "size": 30,
+    "finite_model_weights": true
+  },
+  "runs/a10-meta-2000/checkpoint.pt": {
+    "sha256": "c7d1cf59f869ef6cb882d9ae11f761a2f9a43b1009060c13b9d8482fbabf7a1e",
+    "step": 2000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/a10-no-progress-2000/checkpoint.pt": {
+    "sha256": "90ecd4028fd9bb866dcabbdf59a3f642edfefeec5bebea8a06bd2739f4cc6f16",
+    "step": 2000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/a10-pilot-v3/checkpoint.pt": {
+    "sha256": "8f57ecb1a1e106b26d76ab30f24b6cf4ae36c08344592b70054ded8f957eadda",
+    "step": 400,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/a10-progress10-2000/checkpoint.pt": {
+    "sha256": "cd6635b1a013582ed2fb4198c39e03316c9c548e367e74915c2672709c600c59",
+    "step": 2000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/a10-seed7-2000/checkpoint.pt": {
+    "sha256": "d3d99a3a4b460eddc96edeb04e00b40ce53c25d43478903e5bf3bc5994f2aea8",
+    "step": 2000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/cpu-1000/checkpoint.pt": {
+    "sha256": "da5002e7785bdd21d1d88b31cfdf845238eab73dacbf079d58f814827918d963",
+    "step": 1000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/cpu-no-progress-1000/checkpoint.pt": {
+    "sha256": "6eedd519ea0a1eb71c8bea460e5acf47efc34eeee9a8499c0c7bb5ab94b475ee",
+    "step": 1000,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/cpu-smoke/checkpoint.pt": {
+    "sha256": "2d7f229960e6f57c08cc9c9a02850641dd1c7d3c0879d205c4259bf3c0c4c846",
+    "step": 12,
+    "size": 8,
+    "finite_model_weights": true
+  },
+  "runs/l40s-canvas30/checkpoint.pt": {
+    "sha256": "6764583cb3054efd527fd062bace5719b8a44c858546d03022d3dd983683855e",
+    "step": 200,
+    "size": 30,
+    "finite_model_weights": true
+  },
+  "runs/l40s-pilot/checkpoint.pt": {
+    "sha256": "8b11caa0557936430af2101f11ee64aed4cb69c89cefbfe5e6103e5d23b2aa8e",
+    "step": 400,
+    "size": 8,
+    "finite_model_weights": true
+  }
+}

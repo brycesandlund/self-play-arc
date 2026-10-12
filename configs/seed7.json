@@ -1,0 +1,11 @@
+{
+  "size": 8,
+  "puzzles": 4,
+  "support": 3,
+  "train_episodes": 2,
+  "validation_episodes": 2,
+  "inner_steps": 1,
+  "target_probability": 0.8,
+  "progress_weight": 1.0,
+  "seed": 7
+}
