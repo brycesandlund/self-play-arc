@@ -13,6 +13,13 @@ input search, and the existing solver. Browse the [interactive grid gallery](rep
 These are synthetic diagnostics, not ARC benchmark scores. Run history is in
 [training_runs.md](training_runs.md).
 
+The next study, [XP003: object representations](reports/XP003_OBJECTS.md), tests
+soft region propagation, random shared object selectors, few-shot inverse fits,
+differentiable teacher refinement, diversity penalties, soft composition, and
+CompressARC-inspired pooling/scan layers. It uses synthetic boards only and does
+not modify the original self-play trainer. See the [example transformations](reports/xp003-random-objects.png)
+and [numerical summary](reports/xp003-summary.json).
+
 ## Model and objective
 
 - `BoardGenerator(z, u)` emits an input color distribution for each cell. Puzzle

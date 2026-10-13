@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "base",
+    "median_mask_gradient": 4.901622378383763e-05
+  },
+  {
+    "mode": "prior",
+    "median_mask_gradient": 0.00014544909936375916
+  },
+  {
+    "mode": "sharp2",
+    "median_mask_gradient": 1.3808025869366247e-06
+  },
+  {
+    "mode": "sharp",
+    "median_mask_gradient": 3.0993341573748445e-11
+  }
+]

@@ -300,3 +300,138 @@ updates. **All 44 tests passed**; [test output](reports/xp002-tests.txt) is save
 with the report. Static figures were visually inspected. Automatic browser
 review blocked the optional local-file HTML preview; the gallery is saved but
 was not browser-tested.
+
+
+## XP003 — Object representations, task refinement, and architectural ablations
+
+**Run date:** 2026-10-12. **Status:** Complete. All local CPU; **$0 additional
+cloud compute**. No ARC examples, external training data, pretrained weights,
+or official ARC evaluation. The original self-play trainer is unchanged.
+
+Report: [XP003_OBJECTS.md](reports/XP003_OBJECTS.md). Figures:
+[random rules](reports/xp003-random-objects.png),
+[main results](reports/xp003-results.png),
+[population tradeoff](reports/xp003-population.png).
+Numerical aggregates and complete run inventory:
+[xp003-summary.json](reports/xp003-summary.json).
+
+### Question and implementation
+
+Does replacing color masks with explicit soft region representations make random
+neural transformation weights produce more coherent, learnable tasks? Can
+backpropagation refine such tasks without eliminating diversity? Which selected
+CompressARC architectural ideas help?
+
+Each cell seeds a candidate region, followed by same-color, four-neighbor max
+propagation. Pooled log area, centroid, and spatial spread feed a shared random
+linear scorer; a softmax chooses an object to recolor or move one cell. A seed
+multiplicity correction prevents automatic preference for larger regions.
+Foreground-connectivity and pooled color features are separate ablations.
+These are explicit human architectural priors, not learned segmentation.
+Synthetic instance labels are evaluation metadata only.
+
+Default: four objects on 12×12 boards, with repeated-color, irregular,
+multicolored, touching-object, and 30×30 controls. Candidate masks and generated
+boards remain soft. Some inverse-fitting controls deliberately harden target
+labels to measure the contribution of soft-label side information.
+
+### Main results
+
+- **Coherent random rules:** geometry-only local-region selectors at temperature
+  0.03 choose one whole object in all audited repeated/same-color, irregular, and
+  30×30 cases. Color masks select whole objects on only 49.7% of repeated-color
+  boards and 0% of same-color boards. This narrow distribution does not establish
+  general object segmentation; long paths and multicolored entities expose limits.
+- **Known-family inverse fitting:** 24 random teachers, 32 query boards each,
+  two Adam restarts of 400 steps. For geometry/recolor rules, three demonstrations
+  yield 75.5% exact query agreement with soft targets or **70.3% with hard targets**.
+  Eight/sixteen hard demonstrations yield 80.7%/91.7%. Identity is about 0.1%.
+  Giving the learner the correct family is a substantial advantage; this is not
+  the existing in-context solver or an ARC score.
+- **Meta-refinement:** 64 teachers across an initial study and independent-seed
+  replication; 120 outer updates through five student SGD updates per episode.
+  Guarded post-adaptation KL improves held-out short-adaptation accuracy from
+  **69.3% to 79.1%**, with 98.5% whole-object edits. Entropy-only refinement reaches
+  73.6%. The learner is a fresh known-family object scorer, not a retained solver.
+- **Diversity is still a problem:** on fresh boards, pairwise selection agreement
+  rises from 26.6% to 42.4% after guarded refinement, despite all 64 rules retaining
+  distinct signatures. Pixel loss can favor smaller edited regions.
+- **Differentiable population repulsion helps:** four banks of 16 teachers at
+  160 steps, followed by two banks at 1,000 steps. In the long run, no repulsion
+  gives 82.4% accuracy but 67.7% pairwise output agreement (initially 26.3%). A
+  moderate penalty gives **78.2% accuracy and 35.0% agreement**; stronger repulsion
+  gives 76.2% and 28.5%. This is a measured diversity/learnability tradeoff inside
+  a small fixed family, not an open-ended discovery system.
+- **Soft composition:** after four composed recolor/move transforms, agreement
+  with a rounded-intermediate reference is 14.8% for the base representation,
+  78.6% with confidence-aware seed weighting, 91.1% with square-power sharpening,
+  and 94.5% with fourth-power sharpening. The reference is a stability diagnostic.
+  Fourth-power sharpening almost eliminates gradients through region decisions;
+  squaring is less severe but still attenuates them.
+- **CompressARC-inspired scans help selected tasks:** four matched 18,011-parameter
+  conditional CNN variants (local, pooling, scans, both), three seeds and 800
+  updates per fit. With eight demos, ray extension improves from **7.3% local to
+  80.2% with scans** (77.1% on 30×30). Scans do not replace object representations
+  on selection tasks. These are component ablations, not a CompressARC reproduction.
+- **Multiple grouping priors:** a learned scalar gate selects same-color versus
+  foreground-connectivity banks from grid demonstrations. After excluding tied
+  selection targets, eight-demo fits reach 100% and 97.1% query agreement,
+  respectively, in the limited mixed-scene control. The gate has only two choices.
+
+### Run inventory
+
+All paths below contain configuration, exact source snapshots/hashes, and results.
+Later variants are follow-ups, not replacements unless explicitly marked.
+`runs/` remains gitignored; tracked per-seed details are under `reports/xp003-*`.
+
+| Run ID | Reported optimizer updates | Status / interpretation |
+|---|---:|---|
+| [xp003-audit](runs/xp003-audit/summary.json) | 0 | Invalidated: empty-seed probability bug |
+| [xp003-audit-v2](runs/xp003-audit-v2/summary.json) | 0 | Complete |
+| [xp003-composition](runs/xp003-composition/summary.json) | 0 | Complete |
+| [xp003-composition-v2](runs/xp003-composition-v2/summary.json) | 0 | Complete |
+| [xp003-controls](runs/xp003-controls/summary.json) | 76,800 | Complete |
+| [xp003-explore](runs/xp003-explore/summary.json) | 0 | Complete |
+| [xp003-gradients](runs/xp003-gradients/summary.json) | 0 | Complete |
+| [xp003-gradients-v2](runs/xp003-gradients-v2/summary.json) | 0 | Complete |
+| [xp003-grouping](runs/xp003-grouping/summary.json) | 38,400 | Complete |
+| [xp003-grouping-untied](runs/xp003-grouping-untied/summary.json) | 38,400 | Complete |
+| [xp003-infer](runs/xp003-infer/summary.json) | 115,200 | Invalidated: empty-seed probability bug |
+| [xp003-infer-v2](runs/xp003-infer-v2/summary.json) | 230,400 | Complete |
+| [xp003-learners](runs/xp003-learners/config.json) | Uncounted partial run | Interrupted; invalidated |
+| [xp003-learners-signfix](runs/xp003-learners-signfix/summary.json) | 38,400 | Complete |
+| [xp003-learners-v2](runs/xp003-learners-v2/summary.json) | 96,000 | Exclude smallest/leftmost; replaced by signfix rows |
+| [xp003-named-inverse](runs/xp003-named-inverse/summary.json) | 64,000 | Exclude smallest/leftmost; replaced by signfix rows |
+| [xp003-named-signfix](runs/xp003-named-signfix/summary.json) | 25,600 | Complete |
+| [xp003-population](runs/xp003-population/summary.json) | 2,560 | Complete |
+| [xp003-population-long](runs/xp003-population-long/summary.json) | 8,000 | Complete |
+| [xp003-refine](runs/xp003-refine/summary.json) | 5,760 | Complete |
+| [xp003-refine-replication](runs/xp003-refine-replication/summary.json) | 17,280 | Complete |
+| [xp003-segmentation](runs/xp003-segmentation/summary.json) | 0 | Complete |
+| [xp003-softness](runs/xp003-softness/summary.json) | 0 | Complete |
+| [xp003-softness-v2](runs/xp003-softness-v2/summary.json) | 0 | Complete |
+
+There are **24 run directories: 23 completed, one interrupted**. Completed-run
+summaries report **756,800 optimizer updates**, including invalidated/superseded
+work, excluding interrupted partial iterations and inner-loop expansion. A
+population update changes 16 teacher vectors simultaneously. Summed process
+runtime is approximately **992 seconds**, including overlapping jobs; it is not
+elapsed wall time. All jobs finished; no new recurring tasks or cloud jobs exist.
+
+### Corrections and verification
+
+The first random audit/inference used a finite log-epsilon for absent candidates,
+which could be outweighed by sharp scoring. Those results were invalidated;
+exact-zero candidate masking fixed it. A named-control sign bug made smallest
+behave as largest and leftmost as rightmost; affected rows were excluded and
+rerun. Both bugs have dedicated regression tests and remain documented in raw
+run metadata. A separate grouping follow-up removed genuinely ambiguous tied
+outputs; that initial run was not invalidated.
+
+**All 56 tests passed**, including output probability conservation, soft-input
+first/second derivatives, finite-difference scorer/meta gradients, seed
+multiplicity, named extrema, and equality of vectorized versus independent inner
+updates. [Test output](reports/xp003-tests.txt). All three figures were visually
+inspected. The source and reporting code are in `arcplay/object_lab.py`,
+`arcplay/object_experiments.py`, `arcplay/object_followups.py`, and
+`make_object_report.py`.
