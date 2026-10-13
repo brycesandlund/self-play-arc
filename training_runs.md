@@ -435,3 +435,92 @@ updates. [Test output](reports/xp003-tests.txt). All three figures were visually
 inspected. The source and reporting code are in `arcplay/object_lab.py`,
 `arcplay/object_experiments.py`, `arcplay/object_followups.py`, and
 `make_object_report.py`.
+
+## XP004 — architectural catalogue and one shared solver
+
+**Date:** 2026-10-13. **Data:** procedurally generated only; no external training
+examples or pretrained weights. **Scope:** architectural expressibility,
+in-context inference across primitive families, and demonstration-only gradient
+adaptation. These are synthetic-family scores, not ARC scores.
+
+[Full report](reports/XP004_CATALOGUE_SOLVER.md) ·
+[Measurements](reports/xp004-measurements.json) ·
+[Complete run inventory](reports/xp004-run-inventory.md) ·
+[Catalogue gallery](reports/xp004-catalogue.png)
+
+### Main findings
+
+- Built an **18-operation shared executor** covering object selection, movement,
+  copying, geometry, crop/scale/repetition, count, and object relationships. Added
+  separate sort/pack, shape-match, and hole-fill modules. **1,888 independent
+  semantic checks passed**, including 30×30 boards. The three extra modules are
+  not yet integrated into the learned solver.
+- One shared demonstration encoder reaches **73.1% exact queries on seen bindings
+  / 46.8% on withheld operation–selector bindings** with procedural parameter
+  supervision. Four demos; 108 puzzles × four query boards per split.
+- Mixing rendered alternatives rather than object masks improves demonstration
+  fitting from **74.3% to 94.7%** on withheld bindings, using the same encoder,
+  80 updates, two starts, and Adam learning rate 0.08. Caching makes this fast;
+  forward/gradient equivalence to the uncached renderer is tested.
+- Fitting the same **894-setting finite family without a trained encoder** gives
+  **96.1%**, using four demos and 240 updates × three starts. Fresh scenes/task
+  draws give 95.8%, and a fresh palette-permuted corpus gives 96.1%. Eight demos
+  with learned initialization give 100% on the withheld-binding sample. All
+  support grids were solved. This is strong finite-family inference, not
+  unrestricted neural function discovery.
+- Two-stage composition is still difficult: **32.8% seen pairs / 11.7% unseen
+  pairs**. A smaller joint-adaptation control improves 33.3%→59.4% and
+  14.6%→28.1%, respectively.
+
+### Training runs
+
+The following are training updates, excluding separate batched test-time fits.
+The `*-final` evaluations supersede initial accuracy tables where indicated.
+
+| Run | Updates | Result / interpretation |
+|---|---:|---|
+| `xp004-pilot` | 300 | Exploratory; before tie/evaluation fixes, not a headline result |
+| `xp004-grid` | 6,000 | Grid-only, early routing: 43.1% seen / 28.7% withheld in context |
+| `xp004-hybrid` | 6,000 | Grid + parameter supervision: 59.3% / 42.1% |
+| `xp004-code` | 6,000 | Parameter supervision, structured encoder: 73.1% / 46.8% |
+| `xp004-raw` | 6,000 | Parameter supervision, raw demo encoder: 69.0% / 39.6% |
+| `xp004-late-grid` | 4,320 | Grid-only, rendered routing: 48.6% / 37.3%; A10 time cap |
+| `xp004-annealed` | 2,400 additional | Continued late-grid with lower routing temperature: 53.2% / 35.2%; no withheld improvement |
+| `xp004-palette` | 3,000 additional | Continued code model with palette augmentation: 79.4% / 53.2%; fresh palette transfer improves 13.0%→50.0% |
+| `xp004-direct` | 8,000 | Direct grid decoder, local/scan/object/attention branches: 25.5% / 20.1%; full-weight adaptation 19.4%→25.7% on a separate 36-puzzle control |
+| `xp004-composed` | 3,614 | Two-stage encoder, parameter supervision: 43.0% singles, 32.8% seen pairs, 11.7% withheld pairs |
+
+Total: **45,634 training updates across ten runs**. The inventory additionally
+tracks semantic/gradient audits, exhaustive finite-family fitting, corrected
+validation, adaptation, and domain-shift controls. Most runs used local CPU.
+Three bounded A10 jobs (`late-grid`, `direct`, `annealed`) used an estimated
+**$0.58 of worker time**. Cumulative worker estimates including earlier experiments
+are **$0.78**; conservative reservations total **$11.14 of the $20 cap**, including
+the existing build/misc allowance. These are estimates, not billing invoices.
+
+### Corrections, limits, and artifacts
+
+Initial evaluations sampled scene indices with replacement; occasional demo/query
+index overlap was possible. Final main comparisons use distinct indices and a
+fixed per-batch RNG seed, so restart counts do not change evaluation episodes.
+Checkpoints were retained; affected evaluation tables were superseded. Early
+support fitting now retains its initial solution when appropriate. A soft-crop
+probability-conservation failure was fixed before the main training runs. One
+slow uncached late-routing evaluation was interrupted and replaced by the cached
+implementation. `cached-matched-v2` is the matched-learning-rate control.
+
+The successful cached solver evaluates the explicit finite primitive family on
+support boards. Its cache is not a differentiable path into a board generator;
+use the uncached renderer for that. Canonical selectors, monochrome connectivity,
+limited paint/action parameters, square input canvases, bounded propagation, and
+new compositions remain restrictions. No official ARC benchmark was run.
+
+`arcplay.solve_catalogue.solve` is the runnable inference helper, including an
+option with no pretrained weights. Configuration files are in `configs/xp004/`;
+checkpoints and source snapshots are under `runs/`. The report includes all
+comparisons, per-family results, negative findings, and three inspected figures.
+**77 tests passed**, including independent edit semantics, probability
+conservation, finite-difference and higher-order gradients, cached/uncached
+prediction and gradient agreement, demo-order invariance, disjoint query
+sampling, and end-to-end inference without pretrained weights. All jobs finished;
+no recurring work was scheduled.

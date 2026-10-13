@@ -172,3 +172,42 @@ Separate supervised architecture controls can be run with
 `python -m arcplay.sanity --mode recolor --steps 10000 --output runs/control.json`.
 They start fresh solvers and never feed data or weights into self-play.
 `python make_report.py` regenerates the results and figures (requires matplotlib).
+
+## XP004: catalogue and shared inference
+
+The [XP004 report](reports/XP004_CATALOGUE_SOLVER.md) covers the expanded tensor
+primitive catalogue, a shared demonstration encoder/executor, direct grid-decoder
+controls, composition tests, and demonstration-only gradient adaptation. See
+[training_runs.md](training_runs.md) for every experiment and its qualifications.
+No external data or pretrained weights were used; these are synthetic-family
+results, not ARC benchmark scores.
+
+For full-square, one-hot synthetic boards (`[demos, 11, H, W]`, ten colors + X),
+with outputs padded to the same canvas:
+
+```python
+from arcplay.solve_catalogue import solve
+
+# Infer from demonstrations alone; query answers are never arguments.
+prediction, info = solve(support_x, support_y, query_x,
+                         checkpoint=None, steps=240, restarts=3)
+
+# Or initialize with the trained shared encoder; steps=0 is in-context only.
+prediction, info = solve(support_x, support_y, query_x,
+                         checkpoint="runs/xp004-code/checkpoint.pt", steps=80)
+```
+
+This helper currently uses a CPU cache of an explicit 894-setting architectural
+family. It does not infer arbitrary transformations. For continuous gradients
+through board inputs, use `arcplay.catalogue.execute_late` without that cache.
+The report documents square-input, grouping, color, and composition limitations.
+
+```sh
+python -m arcplay.catalogue_audit --output runs/new-catalogue-audit
+python -m arcplay.catalogue_experiments --config configs/xp004/code.json --output runs/new-code-training
+python -m arcplay.cached_solver --checkpoint runs/xp004-code/checkpoint.pt --output runs/new-cached-eval
+python make_catalogue_report.py
+```
+
+Use unique run directories. Trained checkpoints and raw artifacts remain in
+local gitignored `runs/`; compact measurements, figures, and configs are tracked.

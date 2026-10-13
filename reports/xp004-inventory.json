@@ -1,0 +1,505 @@
+[
+  {
+    "run": "xp004-advanced",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "advanced_audit"
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-annealed",
+    "status": "complete",
+    "steps": 2400,
+    "config": {
+      "seed": 11,
+      "loss": "grid",
+      "structured": true,
+      "late": true,
+      "steps": 2400,
+      "seconds": 350,
+      "pool": 1024,
+      "batch": 24,
+      "width": 32,
+      "adapt_steps": 60,
+      "restarts": 1,
+      "eval_per_family": 6,
+      "resume": "/runs/xp004-late-grid/checkpoint.pt",
+      "temperature_start": 0.7,
+      "temperature_end": 0.12,
+      "lr": 0.0003,
+      "device": "cuda"
+    },
+    "seconds": 326.79376848799996
+  },
+  {
+    "run": "xp004-audit",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "audit",
+      "seed": 104
+    },
+    "seconds": 1.8337867090012878
+  },
+  {
+    "run": "xp004-cached-code",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 240,
+      "restarts": 3,
+      "untrained": false,
+      "demos": 4
+    },
+    "seconds": 50.09379683295265
+  },
+  {
+    "run": "xp004-cached-demos8",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 240,
+      "restarts": 3,
+      "untrained": false,
+      "demos": 8
+    },
+    "seconds": 23.142414500005543
+  },
+  {
+    "run": "xp004-cached-fresh",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 240,
+      "restarts": 3,
+      "untrained": true,
+      "demos": 4,
+      "task_seed": 20101,
+      "pool_description": "fresh seed 400011; original palette"
+    },
+    "seconds": 15.339512957958505
+  },
+  {
+    "run": "xp004-cached-matched",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 80,
+      "restarts": 2,
+      "untrained": false,
+      "demos": 4
+    },
+    "seconds": 5.777207207866013
+  },
+  {
+    "run": "xp004-cached-matched-v2",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 80,
+      "restarts": 2,
+      "untrained": false,
+      "demos": 4,
+      "task_seed": 9011,
+      "pool_description": "standard seed 100011",
+      "learning_rate": 0.08,
+      "check_every": 80
+    },
+    "seconds": 31.43491549999453
+  },
+  {
+    "run": "xp004-cached-palette",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 240,
+      "restarts": 3,
+      "untrained": true,
+      "demos": 4,
+      "task_seed": 20101,
+      "pool_description": "fresh seed 400011; independent per-board palette permutation seed 116"
+    },
+    "seconds": 14.49440999981016
+  },
+  {
+    "run": "xp004-cached-untrained",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "cached_latent_fit",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "steps": 240,
+      "restarts": 3,
+      "untrained": true,
+      "demos": 4
+    },
+    "seconds": 16.71473650005646
+  },
+  {
+    "run": "xp004-code",
+    "status": "complete",
+    "steps": 6000,
+    "config": {
+      "seed": 11,
+      "loss": "code",
+      "steps": 6000,
+      "seconds": 600,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 80,
+      "structured": true,
+      "pool": 1024,
+      "batch": 32,
+      "width": 32,
+      "restarts": 2,
+      "eval_per_family": 6
+    },
+    "seconds": 511.57303933403455
+  },
+  {
+    "run": "xp004-code-final",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 112.8419572499115
+  },
+  {
+    "run": "xp004-code-late-validated",
+    "status": "interrupted",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "late": true,
+      "steps": 100,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-code-validated",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-code/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 127.73974024993367
+  },
+  {
+    "run": "xp004-composed",
+    "status": "complete",
+    "steps": 3614,
+    "config": {
+      "phase": "composition",
+      "seed": 21,
+      "steps": 6000,
+      "seconds": 600,
+      "supervision": "procedural_codes"
+    },
+    "seconds": 600.9275782080367
+  },
+  {
+    "run": "xp004-composed-adapt",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "two_stage_joint_adaptation",
+      "steps": 40,
+      "count": 24,
+      "checkpoint": "runs/xp004-composed/checkpoint.pt"
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-direct",
+    "status": "complete",
+    "steps": 8000,
+    "config": {
+      "phase": "direct_grid",
+      "seed": 11,
+      "steps": 8000,
+      "seconds": 450,
+      "width": 48,
+      "depth": 4,
+      "device": "cuda"
+    },
+    "seconds": 418.02009487600003
+  },
+  {
+    "run": "xp004-direct-adapt",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "full_weight_adaptation",
+      "checkpoint": "runs/xp004-direct/checkpoint.pt",
+      "steps": 100,
+      "count": 36
+    },
+    "seconds": 53.61732662515715
+  },
+  {
+    "run": "xp004-enumeration",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "enumeration",
+      "seed": 11
+    },
+    "seconds": 33.43995283311233
+  },
+  {
+    "run": "xp004-extrapolate",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "extrapolate",
+      "checkpoint": "runs/xp004-code/checkpoint.pt"
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-gradients",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "gradient_audit"
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-grid",
+    "status": "complete",
+    "steps": 6000,
+    "config": {
+      "seed": 11,
+      "loss": "grid",
+      "steps": 6000,
+      "seconds": 600,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 80,
+      "structured": true,
+      "pool": 1024,
+      "batch": 32,
+      "width": 32,
+      "restarts": 2,
+      "eval_per_family": 6
+    },
+    "seconds": 695.3436297499575
+  },
+  {
+    "run": "xp004-grid-final",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-grid/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 139.903474583989
+  },
+  {
+    "run": "xp004-hybrid",
+    "status": "complete",
+    "steps": 6000,
+    "config": {
+      "seed": 11,
+      "loss": "hybrid",
+      "steps": 6000,
+      "seconds": 600,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 80,
+      "structured": true,
+      "pool": 1024,
+      "batch": 32,
+      "width": 32,
+      "restarts": 2,
+      "eval_per_family": 6
+    },
+    "seconds": 696.2318765001837
+  },
+  {
+    "run": "xp004-hybrid-final",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-hybrid/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 141.45066091581248
+  },
+  {
+    "run": "xp004-late-grid",
+    "status": "complete",
+    "steps": 4320,
+    "config": {
+      "seed": 11,
+      "loss": "grid",
+      "structured": true,
+      "late": true,
+      "steps": 6000,
+      "seconds": 450,
+      "pool": 1024,
+      "batch": 24,
+      "width": 32,
+      "adapt_steps": 80,
+      "restarts": 2,
+      "eval_per_family": 6,
+      "device": "cuda"
+    },
+    "seconds": 635.261680514
+  },
+  {
+    "run": "xp004-late-grid-final",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-late-grid/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 107.51357999979518
+  },
+  {
+    "run": "xp004-palette",
+    "status": "complete",
+    "steps": 3000,
+    "config": {
+      "seed": 11,
+      "loss": "code",
+      "steps": 3000,
+      "seconds": 350,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 60,
+      "structured": true,
+      "palette": true,
+      "pool": 1024,
+      "batch": 32,
+      "width": 32,
+      "restarts": 1,
+      "eval_per_family": 6,
+      "resume": "runs/xp004-code/checkpoint.pt",
+      "lr": 0.0005
+    },
+    "seconds": 275.4578875408042
+  },
+  {
+    "run": "xp004-palette-paired",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "palette_transfer",
+      "pool_seed": 400011,
+      "palette_seed": 116,
+      "task_seed": 20101
+    },
+    "seconds": null
+  },
+  {
+    "run": "xp004-pilot",
+    "status": "complete",
+    "steps": 300,
+    "config": {
+      "seed": 0,
+      "loss": "hybrid",
+      "steps": 300,
+      "seconds": 100,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 20,
+      "eval_per_family": 2,
+      "pool": 256,
+      "batch": 16,
+      "width": 24
+    },
+    "seconds": 19.77474099979736
+  },
+  {
+    "run": "xp004-raw",
+    "status": "complete",
+    "steps": 6000,
+    "config": {
+      "seed": 11,
+      "loss": "code",
+      "steps": 6000,
+      "seconds": 600,
+      "device": "cpu",
+      "threads": 2,
+      "adapt_steps": 80,
+      "structured": false,
+      "pool": 1024,
+      "batch": 32,
+      "width": 32,
+      "restarts": 2,
+      "eval_per_family": 6
+    },
+    "seconds": 534.5510719998274
+  },
+  {
+    "run": "xp004-raw-final",
+    "status": "complete",
+    "steps": null,
+    "config": {
+      "phase": "paired_validation",
+      "checkpoint": "runs/xp004-raw/checkpoint.pt",
+      "late": false,
+      "steps": 80,
+      "restarts": 2,
+      "per_family": 6,
+      "distinct_boards": true,
+      "retain_initial_fit": true
+    },
+    "seconds": 109.54388683312573
+  }
+]

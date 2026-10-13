@@ -1,0 +1,1 @@
+{"seed":11,"loss":"grid","structured":true,"late":true,"steps":2400,"seconds":350,"pool":1024,"batch":24,"width":32,"adapt_steps":60,"restarts":1,"eval_per_family":6,"resume":"/runs/xp004-late-grid/checkpoint.pt","temperature_start":0.7,"temperature_end":0.12,"lr":0.0003}

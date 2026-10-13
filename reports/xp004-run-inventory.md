@@ -1,0 +1,34 @@
+| Run | Status | Training updates |
+|---|---|---:|
+| `xp004-advanced` | complete | — |
+| `xp004-annealed` | complete | 2400 |
+| `xp004-audit` | complete | — |
+| `xp004-cached-code` | complete | — |
+| `xp004-cached-demos8` | complete | — |
+| `xp004-cached-fresh` | complete | — |
+| `xp004-cached-matched` | complete | — |
+| `xp004-cached-matched-v2` | complete | — |
+| `xp004-cached-palette` | complete | — |
+| `xp004-cached-untrained` | complete | — |
+| `xp004-code` | complete | 6000 |
+| `xp004-code-final` | complete | — |
+| `xp004-code-late-validated` | interrupted | — |
+| `xp004-code-validated` | complete | — |
+| `xp004-composed` | complete | 3614 |
+| `xp004-composed-adapt` | complete | — |
+| `xp004-direct` | complete | 8000 |
+| `xp004-direct-adapt` | complete | — |
+| `xp004-enumeration` | complete | — |
+| `xp004-extrapolate` | complete | — |
+| `xp004-gradients` | complete | — |
+| `xp004-grid` | complete | 6000 |
+| `xp004-grid-final` | complete | — |
+| `xp004-hybrid` | complete | 6000 |
+| `xp004-hybrid-final` | complete | — |
+| `xp004-late-grid` | complete | 4320 |
+| `xp004-late-grid-final` | complete | — |
+| `xp004-palette` | complete | 3000 |
+| `xp004-palette-paired` | complete | — |
+| `xp004-pilot` | complete | 300 |
+| `xp004-raw` | complete | 6000 |
+| `xp004-raw-final` | complete | — |
