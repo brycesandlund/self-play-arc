@@ -6,6 +6,13 @@ external training data. Generated boards stay soft throughout training.
 See [pilot results](reports/RESULTS.md) for the measured collapse behavior, matched
 ablations, hardware timings and checkpoints from the initial experiments.
 
+The follow-up [random neural primitives study](reports/XP002_PRIMITIVES.md) tests
+17 structured architectures without a hypernetwork: 1,224 initializations,
+composition/interpolation, three-demo inverse learning, differentiable refinement,
+input search, and the existing solver. Browse the [interactive grid gallery](reports/xp002-gallery.html).
+These are synthetic diagnostics, not ARC benchmark scores. Run history is in
+[training_runs.md](training_runs.md).
+
 ## Model and objective
 
 - `BoardGenerator(z, u)` emits an input color distribution for each cell. Puzzle

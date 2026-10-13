@@ -1,0 +1,19 @@
+{
+  "conv": 0.0,
+  "residual_conv": 1.0,
+  "color": 0.0,
+  "color_bg": 0.0,
+  "transport": 0.0,
+  "separable": 0.08333333333333333,
+  "dihedral": 0.16666666666666666,
+  "affine": 0.0,
+  "axis_affine": 0.0078125,
+  "content_attention": 0.0,
+  "gated_transport": 0.546875,
+  "dilate": 0.5755208333333334,
+  "erode": 0.5755208333333334,
+  "flood": 0.4635416666666667,
+  "relative_motion": 0.6458333333333334,
+  "count_gate": 0.9713541666666666,
+  "mirror_copy": 0.16666666666666666
+}
