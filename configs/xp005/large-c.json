@@ -1,0 +1,26 @@
+{
+  "data": "runs/xp005-data/large_fresh_labels.pt",
+  "width": 48,
+  "depth": 4,
+  "lr": 0.001,
+  "decay": 0.001,
+  "batch": 24,
+  "steps": 5000,
+  "seconds": 540,
+  "examples": 1024,
+  "check_every": 100,
+  "seed": 67,
+  "indices": [
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "seconds_per_task": 60.0,
+  "resume": "runs/xp005-resume-large-c"
+}

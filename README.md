@@ -211,3 +211,67 @@ python make_catalogue_report.py
 
 Use unique run directories. Trained checkpoints and raw artifacts remain in
 local gitignored `runs/`; compact measurements, figures, and configs are tracked.
+
+## XP005: a shared computational neural architecture
+
+The [XP005 report](reports/XP005_NEURAL_SOLVER.md) tests a neural board-to-board
+architecture with learned convolutions, directional pooling, attention, and
+continuous spatial maps. Its solver receives grids and demonstration features;
+it does not execute a finite catalogue of transformations. The catalogue and
+older primitive networks are used only as offline teachers.
+
+The same architecture independently fitted to each task reaches 70.6% exact
+queries across 20 nonidentity single-stage tasks and 61.6% across eight
+compositions after continuation with more examples. These are separate learned
+weight sets. A genuinely shared model reaches 10.2% with eight demonstrations,
+then 23.6% with full-weight gradient adaptation. No external data or pretrained
+weights were used. These are restricted synthetic-family results, not ARC scores.
+
+```python
+from arcplay.solve_neural import solve
+
+# support_x, support_y: [S, 11, H, W]; query_x: [Q, 11, H, W].
+# One-hot grids use ten colors plus X padding, on a common allocated canvas.
+probabilities, info = solve(
+    support_x, support_y, query_x,
+    checkpoint="runs/xp005-icl/checkpoint.pt",
+    steps=0,  # in-context inference
+)
+
+# Optimize actual neural weights using only the demonstrations.
+probabilities, info = solve(
+    support_x, support_y, query_x,
+    checkpoint="runs/xp005-icl/checkpoint.pt",
+    steps=200, lr=0.0002,
+)
+labels = probabilities.argmax(dim=1)
+```
+
+Adaptation needs at least two demonstrations. It predicts each demonstration
+from the others and selects the lowest support-loss checkpoint, including the
+initial weights. Query answers are never arguments. `info` includes actual
+updates, best update, support loss, and any numerical stop. This helper returns
+a padded canvas; it is not an official ARC evaluation or shape-decoding pipeline.
+The architecture accepts different canvas sizes, but strong size transfer has
+not been established.
+
+Generate the data banks using [the data instructions](reports/xp005-data.md), then:
+
+```sh
+python -m arcplay.neural_experiments --config configs/xp005/fit-a.json --output runs/new-neural-fits
+python -m arcplay.neural_experiments --config configs/xp005/icl.json --output runs/new-neural-icl
+python -m arcplay.neural_experiments --config configs/xp005/latent.json --output runs/new-neural-latent
+python make_neural_report.py
+```
+
+These configs default to local CPU; wall-clock limits produce different update
+counts on different hardware. `neural_modal.py` runs bounded A10/L40S jobs under
+the original budget ledger. That ledger is nearly fully reserved; launching
+another A10 job currently exceeds its conservative $20 cap. Do not reset it to
+bypass the cap.
+
+Run source snapshots preserve the exact implementation used for reported scores.
+The current code includes a subsequent mathematically equivalent attention-bias
+precision improvement and nonfinite-update guards; the measured runs have not
+been repeated with this maintenance change. See [the run inventory](reports/xp005-run-inventory.md)
+and [training_runs.md](training_runs.md) for complete results and limitations.

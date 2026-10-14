@@ -1,0 +1,35 @@
+{
+  "data": "runs/xp005-data/main_labels.pt",
+  "width": 48,
+  "depth": 4,
+  "lr": 0.002,
+  "decay": 0.0001,
+  "batch": 16,
+  "steps": 4000,
+  "steps_by_task": {
+    "8": 1776,
+    "9": 1817,
+    "10": 1590,
+    "12": 1514,
+    "13": 1567,
+    "16": 1635,
+    "17": 1644,
+    "20": 1573
+  },
+  "seconds": 540,
+  "seconds_per_task": 67.5,
+  "examples": 256,
+  "check_every": 100,
+  "seed": 17,
+  "indices": [
+    8,
+    9,
+    10,
+    12,
+    13,
+    16,
+    17,
+    20
+  ],
+  "spatial_init": "orthogonal"
+}

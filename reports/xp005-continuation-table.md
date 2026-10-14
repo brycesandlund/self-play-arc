@@ -1,0 +1,30 @@
+| Transformation | Before | After continuation | Fresh test boards |
+|---|---:|---:|---:|
+| recolor | 73.2% | 79.5% | 127 |
+| delete | 72.4% | 87.4% | 127 |
+| move | 82.7% | 96.9% | 127 |
+| copy | 85.2% | 93.0% | 128 |
+| bbox | 80.5% | 93.0% | 128 |
+| outline | 64.8% | 85.9% | 128 |
+| ray | 72.7% | 89.1% | 128 |
+| crop | 20.3% | 50.0% | 128 |
+| rotate | 30.7% | 49.6% | 127 |
+| reflect | 43.8% | 73.4% | 128 |
+| scale | 49.2% | 81.0% | 126 |
+| repeat_h | 27.8% | 59.5% | 126 |
+| repeat_v | 23.4% | 47.7% | 128 |
+| count | 66.1% | 92.9% | 127 |
+| link | 44.9% | 90.6% | 127 |
+| align | 11.0% | 22.0% | 127 |
+| stamp | 8.6% | 19.5% | 128 |
+| fill_holes | 99.2% | 100.0% | 127 |
+| shape_match | 68.0% | 93.0% | 128 |
+| pack_sorted | 2.3% | 8.6% | 128 |
+| recolor_then_move | 57.8% | 93.8% | 128 |
+| move_then_recolor | 69.5% | 71.9% | 128 |
+| copy_then_recolor | 62.5% | 89.1% | 128 |
+| outline_then_crop | 0.8% | 43.8% | 128 |
+| move_then_outline | 38.6% | 73.2% | 127 |
+| reflect_then_scale | 32.8% | 63.3% | 128 |
+| rotate_then_recolor | 9.4% | 50.0% | 128 |
+| recolor_then_pack | 2.4% | 7.9% | 127 |

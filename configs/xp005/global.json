@@ -1,0 +1,14 @@
+{
+  "data": "runs/xp005-data/global.pt",
+  "width": 32,
+  "depth": 3,
+  "device": "cpu",
+  "lr": 0.002,
+  "batch": 16,
+  "steps": 2000,
+  "seconds": 220,
+  "seconds_per_task": 55,
+  "seed": 17,
+  "examples": 128,
+  "check_every": 100
+}

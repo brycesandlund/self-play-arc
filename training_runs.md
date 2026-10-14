@@ -524,3 +524,83 @@ conservation, finite-difference and higher-order gradients, cached/uncached
 prediction and gradient agreement, demo-order invariance, disjoint query
 sampling, and end-to-end inference without pretrained weights. All jobs finished;
 no recurring work was scheduled.
+
+## XP005 — one computational neural architecture, independent fits and shared inference
+
+**Date:** 2026-10-13. **Data:** synthetic procedural boards and hardened outputs
+of earlier neural teachers; no external data or pretrained weights. This run
+replaces finite catalogue selection with actual optimization of neural
+computational weights. It does not establish an ARC benchmark score.
+
+[Full report](reports/XP005_NEURAL_SOLVER.md) ·
+[Every run and diagnostic](reports/xp005-run-inventory.md) ·
+[Measurements](reports/xp005-measurements.json) ·
+[Data definitions and split audit](reports/xp005-data.md)
+
+### Main results
+
+- Built one 329,272-parameter core: convolutions, learned directional weighted
+  pooling, spatial/content attention, and learned color copying, with continuous
+  hidden states. No operation IDs, object masks, or candidate rule outputs enter
+  the solver. Its demonstration encoder adds 84,800 parameters.
+- Independently fit this same architecture to 48 fixed tasks: 21 single-stage
+  tasks, eight compositions, and 19 earlier neural teachers. Initial exact query
+  scores are **48.9% on 20 nonidentity single-stage tasks**, **33.2% on eight
+  compositions**, and **87.6% on 15 nontrivial neural teachers**. Four sampled
+  neural teachers are identity/constant controls and excluded from the latter.
+- Continue 28 nonidentity core/composition fits with 1,024 more training examples
+  per task. Paired fresh-query scores improve **51.3%→70.6%** on single-stage
+  tasks and **34.2%→61.6%** on compositions. Extra updates and changed optimizer
+  settings accompany the extra data. Move reaches 96.9%, shape match 93.0%,
+  hole filling 100%, and recolor-then-move 93.8%; sort/pack remains 8.6%.
+- Shared in-context training on 174 rule variants gives **10.4%** on 58 held-out
+  variants with four demos, versus 0.7% with wrong-task demos. Eight demos give
+  **10.2%**, improved to **23.6% by 200 full-weight updates**. On the stricter
+  40-task subset with new parameterizations, this is **5.1%→20.5%**. No family
+  is entirely withheld; 18 evaluation variants repeat a training parameterization.
+- A second shared core jointly trained with continuous 128-dimensional task
+  vectors gets 41.2% when given known training vectors. Fitting a fresh vector
+  from four/eight demos gives **17.2%/18.3%** on held-out variants. This uses
+  continuous task features, not logits selecting catalogue operations.
+- Controlled dense reflection fits show **0%→100% for all three seeds** when only
+  final spatial-map initialization changes from identity to random orthogonal
+  maps. A broader object-task control finds no consistent gain. The same
+  function class can be much easier or harder to learn depending on initialization.
+
+### Run accounting and failures
+
+The inventory records all five initial fit batches (`xp005-fit-a` through `e`),
+three continuation batches (`xp005-large-a` through `c`), shared in-context and
+latent training, full-weight adaptation, the broader initialization control,
+the canceled in-context continuation, four dense CPU controls, nine controlled
+reflection fits, CPU stability continuation, resolution evaluation, and informal
+preflights with their reproducibility limits. Checkpoints, source snapshots,
+configs, per-task metrics, and predictions are retained under `runs/`.
+
+The in-context continuation developed NaN losses by its 1,000-step log and was
+explicitly stopped. Its weights/results are not used. A CPU continuation stayed
+finite for 824 updates. Diagnostics found avoidable FP32 attention-bias error;
+a subsequent algebraically equivalent centered-bias implementation improves
+precision but is not a verified cure for the GPU failure. Nonfinite loss/gradient
+guards were added. All headline measurements preserve their original sources.
+
+A small 30×30 transfer control shows substantial degradation. In particular,
+hole filling solves **0/18 large boards requiring edits**; its six successes are
+unchanged controls. Architecture accepting 30×30 tensors does not imply learned
+size invariance. Many tasks also remain hard to fit on their training boards.
+
+Twelve completed A10 jobs used 5,917.48 measured worker seconds, estimated
+**$2.47**. The canceled continuation's actual cost is unknown and not treated as
+zero. Cumulative measured worker estimates are **$3.24**, excluding unmeasured
+charges. Conservative reservations, including all 13 new jobs and prior work,
+plus the existing misc allowance total **$19.425 of $20**. All jobs finished or
+were explicitly stopped; no recurring work was scheduled.
+
+The data audit found zero global train/validation/test input intersections in
+the shared-training bank. Continued fits use fresh queries excluding every
+original same-task input; old query scores must not be reused after continuation.
+See the report for the full protocol, per-family results, examples, and tests.
+
+**108 tests passed** after final changes, including dataset/semantic audits,
+neural gradient flow, demonstration-order invariance, query-independent support
+fitting, equivalent spatial-bias gradients, and nonfinite-update recovery.

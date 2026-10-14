@@ -1,0 +1,23 @@
+{
+  "data": "runs/xp005-data/bank_v2.pt",
+  "width": 48,
+  "depth": 4,
+  "lr": 0.002,
+  "batch": 16,
+  "steps": 4000,
+  "seconds": 540,
+  "examples": 256,
+  "check_every": 100,
+  "seed": 17,
+  "indices": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28
+  ],
+  "seconds_per_task": 67.5
+}
